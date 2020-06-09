@@ -15,18 +15,20 @@ addExpenses.toLowerCase();
 console.log(addExpenses.split(', '));
 
 let expenses1 = prompt('Введите обязательную статью расходов?'),
-    amount1 = prompt('Во сколько это обойдется?'),
+    amount1 = +prompt('Во сколько это обойдется?'),
     expenses2 = prompt('Введите обязательную статью расходов?'),
-    amount2 = prompt('Во сколько это обойдется?');
+    amount2 = +prompt('Во сколько это обойдется?');
 
 function getExpensesMonth (){
-    return amount + amount2; 
+    return amount1 + amount2; 
 }
 console.log('расходы за месяц: ' + getExpensesMonth());
 
-let accumulatedMonth = function getAccumulatedMonth(){
+function getAccumulatedMonth(){
     return money - amount1 - amount2;
-};
+}
+
+let accumulatedMonth =  getAccumulatedMonth();
 
 function getTargetMonth(){
     return Math.ceil(mission / accumulatedMonth);
