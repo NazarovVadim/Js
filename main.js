@@ -1,9 +1,20 @@
-let money = prompt('Ваш месячный доход?'),
+let isNumber = function (n){
+    return !isNaN(parseFloat(n)) && isFinite(n);
+};
+
+let money,
     income = 'фриланс',
     addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую'),
     deposit = confirm('Есть ли у вас депозит в банке?'),
     mission = 10000000,
     period = 12;
+
+let start = function(){
+    do{
+        money = prompt('Ваш месячный доход?');
+    } while (!isNumber(money));
+};
+start();
 
 function showTypeOf(data){
     console.log(typeof data);
@@ -14,27 +25,41 @@ showTypeOf(deposit);
 addExpenses.toLowerCase();
 console.log(addExpenses.split(', '));
 
-let expenses1 = prompt('Введите обязательную статью расходов?'),
-    amount1 = +prompt('Во сколько это обойдется?'),
-    expenses2 = prompt('Введите обязательную статью расходов?'),
-    amount2 = +prompt('Во сколько это обойдется?');
-
+let expenses = [];
 function getExpensesMonth (){
-    return amount1 + amount2; 
+    let sum = 0,
+    amount;
+
+    for(let i = 0; i < 2; i++){
+        expenses[i] = prompt('Введите обязательную статью расходов?');
+        
+        do{
+            amount = prompt('Во сколько это обойдется?');
+        } while (!isNumber(amount));
+        sum += +amount;
+    }
+    console.log(sum);
+    
+    return sum; 
 }
-console.log('расходы за месяц: ' + getExpensesMonth());
+
+let expensesAmount = getExpensesMonth();
+console.log('расходы за месяц: ' + expensesAmount);
 
 function getAccumulatedMonth(){
-    return money - amount1 - amount2;
+    return money - expensesAmount;
 }
-
 let accumulatedMonth =  getAccumulatedMonth();
 
 function getTargetMonth(){
     return Math.ceil(mission / accumulatedMonth);
 }
 
-console.log('цель будет достигнута за ' + getTargetMonth() + ' месяцев');
+if (getTargetMonth() <= 0){
+    console.log('Цель не будет достигнута');
+} else {
+    console.log('цель будет достигнута за ' + getTargetMonth() + ' месяцев');
+}
 
 let budjetDay = accumulatedMonth / 30;
 console.log('дневной бюджет: ' + Math.floor(budjetDay));
