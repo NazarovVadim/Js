@@ -189,19 +189,15 @@ let appData = {
         periodAmount.textContent = periodSelect.value;
     },
     startButtonCheck: function(){
-        if(salaryAmount.value.trim() === ''){
-            startButton.setAttribute('disabled', 'disabled');
-        } else{
-            startButton.removeAttribute('disabled');
-        }
+        startButton.disabled = salaryAmount.value.trim() === '';
     },
     addListenersNum: function(input){
-        input.addEventListener('keydown', function(){
+        input.addEventListener('input', function(){
             input.value=input.value.replace(/[^0-9]/g, '');
         });
     },
     addListenersStr: function(input){
-        input.addEventListener('keydown', function(){
+        input.addEventListener('input', function(){
             input.value=input.value.replace(/[^а-яА-Я, ]/g, '');
         });
     }
@@ -212,7 +208,7 @@ startButton.addEventListener('click', appData.start);
 expensesAddButton.addEventListener('click', appData.addExpensesBlock);
 incomeAddButton.addEventListener('click', appData.addIncomeBlock);
 periodSelect.addEventListener('input', appData.liveChangePeriod);
-salaryAmount.addEventListener('change', appData.startButtonCheck);
+salaryAmount.addEventListener('input', appData.startButtonCheck);
 appData.addListenersNum(document.querySelector('.income-amount'));
 appData.addListenersNum(salaryAmount);
 appData.addListenersNum(targetAmount);
