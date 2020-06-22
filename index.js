@@ -87,6 +87,8 @@ let appData = {
             expensesItems[1].remove();
             expensesItems[2].remove();
         }
+
+        periodAmount.textContent = '1';
         this.income = {};
         this.addIncome = [];
         this.expenses = {};
