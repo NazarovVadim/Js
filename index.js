@@ -213,25 +213,25 @@ let appData = {
         return Math.ceil(targetAmount.value / Math.floor(this.budgetMonth));
     },
     getStatusIncome: function(){
-        if (appData.budgetDay > 1200) {
+        if (this.budgetDay > 1200) {
             console.log('у вас высокий уровень дохода');
-        } else if (appData.budgetDay >= 600 && appData.budgetDay <= 1200){
+        } else if (this.budgetDay >= 600 && this.budgetDay <= 1200){
             console.log('У вас средний уровень дохода');    
-        } else if (appData.budgetDay < 600 && appData.budgetDay >= 0){
+        } else if (this.budgetDay < 600 && this.budgetDay >= 0){
             console.log('К сожалению, ваш уровень дохода - ниже среднего');    
         } else {
             console.log('Что-то пошло не так');
         }
     },
     getInfoDeposit: function(){
-        if (appData.deposit){
+        if (this.deposit){
             do{
-                appData.percentDeposit = prompt('Каков годовой процент?', 10);
-            } while(!isNumber(appData.percentDeposit));
+                this.percentDeposit = prompt('Каков годовой процент?', 10);
+            } while(!isNumber(this.percentDeposit));
             
             do{
-                appData.moneyDeposit = prompt('Какова сумма депозита', 10000);
-            } while (!isNumber(appData.moneyDeposit));
+                this.moneyDeposit = prompt('Какова сумма депозита', 10000);
+            } while (!isNumber(this.moneyDeposit));
             
         }
     },
