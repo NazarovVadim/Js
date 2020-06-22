@@ -128,13 +128,16 @@ let appData = {
         }
     },
     getExpenses: function(){
+
+
+
         expensesItems.forEach(function(item){
             let itemExpenses = item.querySelector('.expenses-title').value;
             let cashExpenses = item.querySelector('.expenses-amount').value;
             if(itemExpenses !== '' && cashExpenses !== ''){
-                appData.expenses[itemExpenses] = cashExpenses;
+                this.expenses[itemExpenses] = cashExpenses;
             }
-        });
+        }, appData);
     },
     addIncomeBlock: function(){   
         let cloneIncomeItem = incomeItems[incomeItems.length-1].cloneNode(true);
@@ -154,9 +157,9 @@ let appData = {
             let itemIncome = item.querySelector('.income-title').value;
             let cashIncome = item.querySelector('.income-amount').value;
             if(itemIncome !== '' && cashIncome !== ''){
-                appData.income[itemIncome] = cashIncome;
+                this.income[itemIncome] = cashIncome;
             }
-        });
+        }, appData);
 
         for(let key in this.income){
             this.incomeMonth += +this.income[key];
@@ -169,17 +172,17 @@ let appData = {
         addExpenses.forEach(function(item){
             item = item.trim();
             if (item !== ''){
-                appData.addExpenses.push(item);
+                this.addExpenses.push(item);
             }
-        });
+        }, appData);
     },
     getAddIncome: function(){
         additionalIncomeItems.forEach(function(item){
             let itemValue = item.value.trim();
             if(itemValue !== ''){
-                appData.addIncome.push(itemValue);
+                this.addIncome.push(itemValue);
             }
-        });
+        }, appData);
     },
     getExpensesMonth: function(){
         for(let key in this.expenses){
