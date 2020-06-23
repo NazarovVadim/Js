@@ -85,6 +85,7 @@ AppData.prototype.reset = function(){
         expensesItems[2].remove();
     }
     periodAmount.textContent = '1';
+    // Object.assign(this,new this.constructor());
     this.income = {};
     this.addIncome = [];
     this.expenses = {};
