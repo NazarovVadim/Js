@@ -85,19 +85,20 @@ AppData.prototype.reset = function(){
         expensesItems[2].remove();
     }
     periodAmount.textContent = '1';
-    // Object.assign(this,new this.constructor());
-    this.income = {};
-    this.addIncome = [];
-    this.expenses = {};
-    this.addExpenses = [];
-    this.deposit = false;
-    this.percentDeposit = 0;
-    this.moneyDeposit = 0;
-    this.budjet = 0;
-    this.budgetDay = 0;
-    this.budgetMonth = 0;
-    this.expensesMonth = 0;
-    this.incomeMonth = 0;
+
+    Object.assign(this, new AppData()); // сбрас свойств к 0
+    // this.income = {};
+    // this.addIncome = [];
+    // this.expenses = {};
+    // this.addExpenses = [];
+    // this.deposit = false;
+    // this.percentDeposit = 0;
+    // this.moneyDeposit = 0;
+    // this.budjet = 0;
+    // this.budgetDay = 0;
+    // this.budgetMonth = 0;
+    // this.expensesMonth = 0;
+    // this.incomeMonth = 0;
     periodSelect.value = 1;
 
     budgetMonthValue.disabled = true;
