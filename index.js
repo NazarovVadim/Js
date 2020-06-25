@@ -192,6 +192,10 @@ class AppData {
         startButton.disabled = true;
         incomeAddButton.disabled = false;
         expensesAddButton.disabled = false;
+        depositCheck.checked = false;
+        depositBank.value = '';
+        depositBank.style.display = 'none';
+        depositAmount.style.display = 'none';
     }
 
     showResult(){
@@ -392,11 +396,13 @@ class AppData {
         this.addListenersNum(salaryAmount);
         this.addListenersNum(targetAmount);
         this.addListenersNum(depositPercent);
+        this.addListenersNum(depositAmount);
         this.addListenersNum(document.querySelector('.expenses-amount'));
         this.addListenersStr(incomeItems[0].querySelector('.income-title'));
         this.addListenersStr(expensesItems[0].querySelector('.expenses-title'));
         this.addListenersStr(document.querySelectorAll('.additional_income-item')[0]);
         this.addListenersStr(document.querySelectorAll('.additional_income-item')[1]);
+
     }
 
 }
