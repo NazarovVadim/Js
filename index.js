@@ -196,6 +196,7 @@ class AppData {
         depositBank.value = '';
         depositBank.style.display = 'none';
         depositAmount.style.display = 'none';
+        depositPercent.style.display = 'none';
     }
 
     showResult(){
