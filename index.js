@@ -19,7 +19,10 @@ const startButton = document.getElementById('start'),
     additionalExpensesItem = document.querySelector('.additional_expenses-item'),
     targetAmount = document.querySelector('.target-amount'),
     periodSelect = document.querySelector('.period-select'),
-    periodAmount = document.querySelector('.period-amount');
+    periodAmount = document.querySelector('.period-amount'),
+    depositBank = document.querySelector('.deposit-bank'),
+    depositAmount = document.querySelector('.deposit-amount'),
+    depositPercent = document.querySelector('.deposit-percent');
 
 let incomeItems = document.querySelectorAll('.income-items'),
     expensesItems = document.querySelectorAll('.expenses-items');
@@ -53,7 +56,7 @@ class AppData {
         this.getExpInc();
         this.getExpensesMonth();
         this.getAddExpInc();
-
+        this.getInfoDeposit();
         this.getBudjet();
         this.showResult();
         salaryAmount.disabled = true;
@@ -203,7 +206,8 @@ class AppData {
     }
 
     getBudjet(){
-        this.budgetMonth =  this.budjet + this.incomeMonth - this.expensesMonth;
+        const monthDeposit = this.moneyDeposit * (this.percentDeposit / 100);
+        this.budgetMonth =  this.budjet + this.incomeMonth - this.expensesMonth + monthDeposit;
         this.budgetDay = Math.ceil(this.budgetMonth / 30);
     }
 
@@ -225,13 +229,8 @@ class AppData {
 
     getInfoDeposit(){
         if (this.deposit){
-            do{
-                this.percentDeposit = prompt('Каков годовой процент?', 10);
-            } while(!isNumber(this.percentDeposit));
-            
-            do{
-                this.moneyDeposit = prompt('Какова сумма депозита', 10000);
-            } while (!isNumber(this.moneyDeposit));
+            this.percentDeposit = depositPercent.value;
+            this.moneyDeposit = depositAmount.value; 
             
         }
     }
@@ -260,16 +259,50 @@ class AppData {
         });
     }
 
+    changePercent(){
+        const valueSelect = this.value;
+        if(valueSelect === 'other'){
+            depositPercent.value = '';
+            depositPercent.style.display = 'inline-block';
+        }else{
+            depositPercent.value = valueSelect;
+            depositPercent.style.display = 'none';
+        }
+
+    }
+
+    depositHandler(){
+        if(depositCheck.checked){
+            depositBank.style.display = 'inline-block';
+            depositAmount.style.display = 'inline-block';
+            this.deposit = true;
+            depositBank.addEventListener('change', this.changePercent);
+        } else{
+            depositBank.style.display = 'none';
+            depositAmount.style.display = 'none';
+            depositBank.value = '';
+            depositAmount.value = '';
+            this.deposit = false;
+            depositBank.removeEventListener('change', this.changePercent);
+        }
+    }
+
     eventListeners(){
         startButton.addEventListener('click', this.start.bind(this));
         resetButton.addEventListener('click', this.reset);
-        expensesAddButton.addEventListener('click', this.addBlock);//this.addExpensesBlock.bind(this)
+        expensesAddButton.addEventListener('click', this.addBlock);
         incomeAddButton.addEventListener('click', this.addBlock);
         periodSelect.addEventListener('input', this.liveChangePeriod);
         salaryAmount.addEventListener('input', this.startButtonCheck);
+        depositCheck.addEventListener('change', this.depositHandler.bind(this));
+        depositPercent.addEventListener('input', () => {
+            depositPercent.value = (depositPercent.value < 0) ? 0 :
+                                    (depositPercent.value > 100) ? 100 : depositPercent.value;
+        });
         this.addListenersNum(document.querySelector('.income-amount'));
         this.addListenersNum(salaryAmount);
         this.addListenersNum(targetAmount);
+        this.addListenersNum(depositPercent);
         this.addListenersNum(document.querySelector('.expenses-amount'));
         this.addListenersStr(incomeItems[0].querySelector('.income-title'));
         this.addListenersStr(expensesItems[0].querySelector('.expenses-title'));
